@@ -194,6 +194,7 @@ nnoremap <F3> :set hlsearch!<CR>                        " toogle search highligh
 nnoremap <F2> :set paste!<CR>                           " toogle paste mode
 nnoremap <F4> :call NumberToggle()<CR>
 nnoremap <F5> :!ctags -R<CR>                            " ctags
+nmap <F8> :TagbarToggle<CR>
 
 " vim-test bindings
 nmap <silent> <leader>t :TestNearest<CR>
