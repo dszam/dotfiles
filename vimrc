@@ -7,7 +7,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'mileszs/ack.vim'
 Plugin 'docunext/closetag.vim'
-Plugin 'wincent/Command-T'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tyok/nerdtree-ack'
@@ -113,8 +113,12 @@ let g:syntastic_enable_signs=1
 let g:syntastic_quiet_messages={'level': 'warnings'}
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
-let g:Powerline_symbols = 'fancy'
 let g:CommandTWildIgnore=&wildignore . ",**/_build/*,**/deps/*,**/doc/*.html,**/node_modules/*"
+
+"Control-P
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
 
 if has("autocmd")
   " Kill all the whitespace
