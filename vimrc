@@ -36,6 +36,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'carlosgaldino/elixir-snippets'
 Plugin 'mattreduce/vim-mix'
+Plugin 'robbles/logstash.vim'
 call vundle#end()
 filetype plugin indent on
 "VUNDLE
@@ -59,6 +60,7 @@ set autoindent
 set ai
 set wildmode=list:longest
 set number
+set relativenumber
 set ruler
 set showmatch
 set mat=5
@@ -105,6 +107,11 @@ set novb
 set updatetime=750
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
+
+let g:alchemist_tag_disable = 1
+let g:alchemist_tag_map = '<C-]>'
+let g:alchemist_tag_stack_map = '<C-T>'
+let g:alchemist#elixir_erlang_src = "/usr/local/share/src"
 
 let NERDTreeChDirMode=2
 let g:NERDTreeDirArrows=0
@@ -180,6 +187,7 @@ nmap <leader>e :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 map <Leader>s :w<CR>
 map <Leader>q :q!<CR>
+cmap w!! w !sudo tee % >/dev/null
 nmap <Leader>n  :CommandT<CR>
 nmap <leader>m  :CommandTBuffer<CR>
 nmap <leader>v  :CommandTJump<CR>
