@@ -50,7 +50,7 @@ bindsym $mod+Return exec terminator
 
 # kill focused window
 bindsym $mod+Shift+q kill
-bindsym $mod+Shift+x exec i3lock --color "$base01"
+bindsym $mod+Shift+x exec i3lock --color "$base00"
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show drun 
@@ -110,7 +110,7 @@ set $workspace2 "2: Terminal"
 set $workspace3 "3: "
 set $workspace4 "4: "
 set $workspace5 "5: Helpers"
-set $workspace6 "6: "
+set $workspace6 "6: Mail"
 set $workspace7 "7: "
 set $workspace8 "8: "
 set $workspace9 "9: "
@@ -120,6 +120,7 @@ workspace $workspace1 output HDMI1
 workspace $workspace2 output HDMI1
 
 workspace $workspace5 output eDP1
+workspace $workspace6 output eDP1
 
 assign [class="Firefox"] $workspace1
 assign [class="Corebird"] $workspace5
@@ -127,6 +128,7 @@ assign [class="TelegramDesktop"] $workspace5
 assign [class="keepassxc"] $workspace5
 assign [class="Seafile Client"] $workspace5
 assign [class="Terminator"] $workspace2	
+assign [class="Thunderbird"] $workspace2	
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -232,3 +234,4 @@ exec keepassxc
 exec terminator
 exec terminator
 exec terminator
+exec thunderbird
