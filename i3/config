@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 set $base00 #101218
 set $base01 #1f222d
 set $base02 #252936
@@ -34,20 +34,13 @@ set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
+exec_always compton -f --active-opacity 0.8
+exec --no-startup-id xrandr --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off --output eDP1 --mode 1920x1080 --pos 1920x0 --rotate normal
+exec --no-startup-id "i3-msg 'workspace \"2: Terminal\"; append_layout ~/.config/i3/ws2.json'"
+exec --no-startup-id "i3-msg 'workspace \"5: Helpers\"; append_layout ~/.config/i3/ws5.json'"
+exec "setxkbmap -layout us"
+
 font pango:Source Sans Pro 12
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -60,18 +53,13 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+x exec i3lock --color "$base01"
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec rofi -show drun 
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+odiaeresis focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -80,10 +68,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+odiaeresis move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -92,7 +80,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+n split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -117,18 +105,28 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $workspace1 "1: Firefox "
-set $workspace2 "2: Terminal "
-set $workspace3 "3: "
-set $workspace4 "4: "
-set $workspace5 "5: "
-set $workspace6 "6: "
-set $workspace7 "7: "
-set $workspace8 "8: "
-set $workspace9 "9: "
-set $workspace10 "10: "
+set $workspace1 "1: Firefox"
+set $workspace2 "2: Terminal"
+set $workspace3 "3: "
+set $workspace4 "4: "
+set $workspace5 "5: Helpers"
+set $workspace6 "6: "
+set $workspace7 "7: "
+set $workspace8 "8: "
+set $workspace9 "9: "
+set $workspace10 "10: "
+
+workspace $workspace1 output HDMI1
+workspace $workspace2 output HDMI1
+
+workspace $workspace5 output eDP1
 
 assign [class="Firefox"] $workspace1
+assign [class="Corebird"] $workspace5
+assign [class="TelegramDesktop"] $workspace5
+assign [class="keepassxc"] $workspace5
+assign [class="Seafile Client"] $workspace5
+assign [class="Terminator"] $workspace2	
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -153,12 +151,13 @@ bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -168,10 +167,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym odiaeresis resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -223,9 +222,13 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-
-exec_always compton -f --active-opacity 0.8
 exec --no-startup-id xautolock -time 5 -locker i3lock &
 exec --no-startup-id nm-applet
-exec --no-startup-id seafile
+exec --no-startup-id seafile-applet
 exec firefox
+exec Telegram
+exec corebird
+exec keepassxc
+exec terminator
+exec terminator
+exec terminator
